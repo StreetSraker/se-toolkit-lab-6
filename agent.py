@@ -359,6 +359,23 @@ You have access to three tools:
 - For bug questions - reproduce with query_api FIRST, then read the source code
 - When you see division in code, check if there's a zero check - if not, that's the bug
 - When you see sorted() or operations on API data, check if None is handled
+
+## IMPORTANT: When to Stop and Give Final Answer
+
+After you have read 2-3 relevant files OR gotten API responses:
+1. STOP calling tools
+2. Synthesize the information you have gathered
+3. Provide a COMPLETE final answer based on what you found
+4. Do NOT keep reading more files unless you truly cannot answer
+
+**Example flow for "request lifecycle" question:**
+1. read_file("docker-compose.yml") - see caddy, app, postgres services
+2. read_file("caddy/Caddyfile") - see reverse proxy config
+3. read_file("Dockerfile") - see FastAPI app
+4. read_file("backend/app/main.py") - see routers and database
+5. **STOP** - you have enough info, now EXPLAIN the full journey
+
+**DO NOT:** Keep reading files indefinitely. After 3-4 files, you MUST provide an answer.
 """
 
 
