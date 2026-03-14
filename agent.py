@@ -395,12 +395,15 @@ If a tool returns an error (e.g., "File not found"):
 ## Comparing Error Handling (ETL vs API)
 
 When asked to compare error handling between ETL and API:
-1. Read ETL code: read_file("backend/app/routers/pipeline.py") - look for try/except blocks
-2. Read API code: read_file("backend/app/routers/analytics.py") - look for error responses
-3. Compare:
-   - ETL: Does it catch exceptions? Does it return error details?
-   - API: Does it return 4xx/5xx status codes? Does it log errors?
-4. Explain the difference: ETL may fail silently vs API returns HTTP errors
+1. Read ETL code: read_file("backend/app/etl.py") - look for try/except, raise_for_status
+2. Read API router: read_file("backend/app/routers/pipeline.py") - look for error responses
+3. Read analytics router: read_file("backend/app/routers/analytics.py") - look for error handling
+4. Compare:
+   - ETL: Uses raise_for_status() - raises HTTPError on failure, no try/except
+   - API routers: May have try/except blocks, return error responses
+5. Explain the difference: ETL fails loudly (exceptions), API may handle gracefully
+
+**IMPORTANT:** You MUST read BOTH files before answering. Do NOT answer after reading only one file.
 """
 
 
